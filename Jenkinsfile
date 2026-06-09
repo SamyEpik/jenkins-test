@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'python:3.11'
-            args '-p 5556:5556'
         }
     }
     triggers {
