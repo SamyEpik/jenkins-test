@@ -1,9 +1,12 @@
 pipeline {
     agent {
-        docker { 
-            image 'python:3.11' 
+        docker {
+            image 'python:3.11'
             args '-p 5556:5556'
         }
+    }
+    triggers {
+        githubPush()
     }
     environment {
         APP_PORT = '5556'
@@ -58,16 +61,19 @@ pipeline {
                 sh 'python tests/test_api.py'
             }
         }
-        stage('Keep Alive') {
+        stage('Deploy') {
             steps {
-                // Keep the container running indefinitely
-                sh 'sleep infinity'
+                sh '''
+                    docker stop hellospencer || true
+                    docker rm hellospencer || true
+                    docker build -t hellospencer .
+                    docker run -d --name hellospencer -p 5556:5556 hellospencer
+                '''
             }
         }
     }
     post {
         always {
-            // Cleanup: Stop the Flask application
             sh 'pkill -f "python src/hello.py" || true'
         }
     }
