@@ -28,6 +28,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
+                    apt-get update -qq && apt-get install -y -qq docker.io
                     python -m pip install --upgrade pip
                     pip install flask
                     pip install requests
