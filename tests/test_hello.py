@@ -36,10 +36,9 @@ class TestHelloSpencer(unittest.TestCase):
         self.assertIn("status", data)
 
         # Test the actual values
-        self.assertEqual(data["message"], "Hello Samuel")
+        self.assertEqual(data["message"], "Hello Spencer")
         self.assertEqual(data["status"], "success")
 
 
 if __name__ == "__main__":
     unittest.main()
-

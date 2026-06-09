@@ -32,7 +32,7 @@ class TestAPIEndpoints(unittest.TestCase):
 
         # Test response data
         data = response.json()
-        self.assertEqual(data["message"], "Hello Samuel")
+        self.assertEqual(data["message"], "Hello Spencer")
         self.assertEqual(data["status"], "success")
 
     def test_api_response_time(self):
@@ -45,4 +45,3 @@ class TestAPIEndpoints(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
